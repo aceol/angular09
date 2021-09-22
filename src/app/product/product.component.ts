@@ -18,5 +18,4 @@ export class ProductComponent {
   isTheLast(): boolean {
     return this.data.stock === 1;
   }
-
 }

@@ -1,25 +1,26 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Product } from '../model/product';
-import { Customer } from '../model/customer';
+import { Product } from '../commons/model/product';
+import { Customer } from '../commons/model/customer';
+import { BasketService } from './basket.service';
 
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.scss']
+  styleUrls: ['./basket.component.scss'],
 })
 export class BasketComponent {
   basket: Product[] = [];
   customer: Customer;
 
-  constructor(private router: Router) {
-    this.basket = (window as any).basket;
+  constructor(private router: Router, private basketService: BasketService) {
+    this.basket = basketService.basket;
     this.customer = new Customer();
   }
 
   checkout() {
-    (window as any).basket = [];
+    this.basketService.checkout();
     this.router.navigate(['']);
   }
 }

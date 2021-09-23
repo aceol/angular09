@@ -1,7 +1,7 @@
 <header class="jumbotron">
     <h1>{{ title }}</h1>
 
-    <p>Votre panier s'élève à {{ getTotal() | currency:'EUR' }}</p>
+    <p>Votre panier s'élève à {{ total$ | async | currency:'EUR' }}</p>
     <p><a class="btn btn-primary btn-large" [routerLink]="['/basket']">Voir mon panier</a></p>
 </header>
 
@@ -14,7 +14,8 @@
 </div>
 
 <div class="row text-center">
-    <ng-container *ngFor="let product of products">
-        <app-product class="col-md-3 col-sm-6" *ngIf="isAvailable(product)" [data]="product" (addToBasket)="addToBasket($event)"></app-product>
+    <ng-container *ngFor="let product of products$ | async">
+        <app-product class="col-md-3 col-sm-6" *ngIf="isAvailable(product)" [data]="product"
+            (addToBasket)="addToBasket($event)"></app-product>
     </ng-container>
 </div>

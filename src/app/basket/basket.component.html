@@ -2,7 +2,7 @@
     <div class="card-header">Basket</div>
 
     <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let product of basket">
+        <li class="list-group-item" *ngFor="let product of basket$ | async">
             {{product.title}} <span class="label label-primary pull-right">{{product.price | currency:'EUR'}}</span>
         </li>
     </ul>

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Product } from '../commons/model/product';
 import { getProductsFromNetwork } from './fake-server/products';
 
@@ -8,8 +10,16 @@ import { getProductsFromNetwork } from './fake-server/products';
 export class CatalogService {
   constructor() {}
 
-  get(): Promise<Product[]> {
-    return getProductsFromNetwork();
+  get(): Observable<Product[]> {
+    return from(getProductsFromNetwork());
+  }
+
+  getCheap(): Observable<Product[]> {
+    return this.get().pipe(
+      map((products: Product[]) =>
+        products.filter((product) => product.price > 20)
+      )
+    );
   }
 
   isAvailable(product: Product): boolean {

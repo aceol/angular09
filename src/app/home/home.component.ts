@@ -1,4 +1,6 @@
 import { Component, Inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { BasketService } from '../basket/basket.service';
 
 import { Product } from '../commons/model/product';
@@ -10,20 +12,18 @@ import { CatalogService } from './catalog.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  products: Product[] = [];
+  products$!: Observable<Product[]>;
+  total$!: Observable<number>;
+  //total$: Observable<number>;
 
   constructor(
     @Inject('welcomeMsg') public title: string,
     private catalogService: CatalogService,
     private basketService: BasketService
   ) {
-    this.catalogService.get().then((products) => {
-      this.products = products;
-    });
-  }
+    this.products$ = this.catalogService.get();
 
-  getTotal(): number {
-    return this.basketService.getTotal();
+    this.total$ = this.basketService.getTotal().pipe(tap(console.log));
   }
 
   addToBasket(product: Product): void {

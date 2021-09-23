@@ -1,6 +1,12 @@
-import { Component, Inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { BasketService } from '../basket/basket.service';
 
 import { Product } from '../commons/model/product';
@@ -10,20 +16,24 @@ import { CatalogService } from './catalog.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   products$!: Observable<Product[]>;
-  total$!: Observable<number>;
-  //total$: Observable<number>;
+  total!: number;
 
   constructor(
     @Inject('welcomeMsg') public title: string,
     private catalogService: CatalogService,
     private basketService: BasketService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.products$ = this.catalogService.get();
 
-    this.total$ = this.basketService.getTotal().pipe(tap(console.log));
+    this.basketService.getTotal().subscribe((number) => {
+      this.total = number;
+    });
   }
 
   addToBasket(product: Product): void {

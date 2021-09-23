@@ -14,14 +14,6 @@ export class CatalogService {
     return from(getProductsFromNetwork());
   }
 
-  getCheap(): Observable<Product[]> {
-    return this.get().pipe(
-      map((products: Product[]) =>
-        products.filter((product) => product.price > 20)
-      )
-    );
-  }
-
   isAvailable(product: Product): boolean {
     return product.stock !== 0;
   }

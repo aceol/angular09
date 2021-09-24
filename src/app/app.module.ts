@@ -19,18 +19,11 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProductComponent,
-    MenuComponent,
-    HomeComponent,
-    BasketComponent,
-  ],
+  declarations: [AppComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -48,3 +41,12 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+// Initial Chunk Files | Names         |      Size
+// vendor.js           | vendor        |   3.46 MB
+// polyfills.js        | polyfills     | 128.52 kB
+// styles.css          | styles        |  78.23 kB
+// main.js             | main          |  54.53 kB
+// runtime.js          | runtime       |   6.63 kB
+
+//                     | Initial Total |   3.72 MB

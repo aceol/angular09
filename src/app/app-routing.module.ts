@@ -1,16 +1,32 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
-import { HomeComponent } from './home/home.component';
-import { BasketComponent } from './basket/basket.component';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'basket', component: BasketComponent }
+  {
+    path: '',
+    loadChildren: () =>
+      import('./home/home.module').then((module) => module.HomeModule),
+  },
+  {
+    path: 'basket',
+    loadChildren: () =>
+      import('./basket/basket.module').then((module) => module.BasketModule),
+  },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./home/home.module').then((module) => module.HomeModule),
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  // 211B, 55.8kB
+  imports: [
+    RouterModule.forRoot(routes, {
+      enableTracing: true,
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

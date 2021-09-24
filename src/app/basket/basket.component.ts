@@ -5,12 +5,7 @@ import { Product } from '../commons/model/product';
 import { Customer } from '../commons/model/customer';
 import { BasketService } from './basket.service';
 import { Observable } from 'rxjs';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basket',

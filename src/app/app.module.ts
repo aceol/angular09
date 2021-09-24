@@ -7,6 +7,13 @@ import { BasketComponent } from './basket/basket.component';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './commons/menu/menu.component';
 import { ProductComponent } from './home/product/product.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -14,15 +21,24 @@ import { ProductComponent } from './home/product/product.component';
     ProductComponent,
     MenuComponent,
     HomeComponent,
-    BasketComponent
+    BasketComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
-    { provide: 'welcomeMsg', useValue: 'Bienvenue sur Zenika Ecommerce' }
+    { provide: 'welcomeMsg', useValue: 'Bienvenue sur Zenika Ecommerce' },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

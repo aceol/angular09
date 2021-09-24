@@ -5,7 +5,13 @@
 
         <ul class="nav navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/basket']">Voir mon Panier</a>
+                <a class="nav-link" [routerLink]="['/basket']">{{ 'CHECK_BASKET' | translate}}</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <button (click)="setLanguage('fr')" class="btn btn-primary">🇫🇷</button>
+                <button (click)="setLanguage('en')" class="btn btn-primary">🇹🇳</button>
             </li>
         </ul>
     </div>

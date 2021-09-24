@@ -2,7 +2,7 @@
     <h1>{{ title }}</h1>
 
     <p>Votre panier s'élève à {{ total | currency:'EUR' }}</p>
-    <p><a class="btn btn-primary btn-large" [routerLink]="['/basket']">Voir mon panier</a></p>
+    <p><a class="btn btn-primary btn-large" [routerLink]="['/basket']">{{ 'CHECK_BASKET' | translate}}</a></p>
 </header>
 
 <hr>

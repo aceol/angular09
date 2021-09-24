@@ -1,11 +1,13 @@
-<div class="product-item thumbnail card" [ngClass]="{ last: isTheLast() }">
+<div class="product-item thumbnail card" [@stockStatus]="(data.stock < 2)?'last':'available'"
+    [ngClass]="{ last: isTheLast() }">
     <img [src]="data.photo" alt="t-shirt" class="card-img">
     <div class="card-body">
-        <h3>{{ data.title | uppercase }} - {{ data.price | currency:'EUR' }}</h3>
+        <h3>{{ data.title | uppercase }} - {{ data.price | currency:'EUR' }} ({{ data.stock }})</h3>
         <p>{{ data.description }}</p>
     </div>
 
     <div class="card-footer">
-        <button class="btn btn-primary" (click)="addToBasketClick()">Ajoutez au panier</button>
+        <button mat-raised-button [color]="isTheLast()?'warn':'accent'" (click)="addToBasketClick()">Ajoutez au
+            panier</button>
     </div>
 </div>

@@ -10,6 +10,8 @@ import { ProductComponent } from './home/product/product.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DesignModule } from './commons/design/design.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -35,6 +37,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
+    BrowserAnimationsModule,
+    DesignModule,
   ],
   providers: [
     { provide: 'welcomeMsg', useValue: 'Bienvenue sur Zenika Ecommerce' },

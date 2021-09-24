@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -12,7 +13,11 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [RouterTestingModule, TranslateModule.forRoot()],
+      imports: [
+        RouterTestingModule,
+        TranslateModule.forRoot(),
+        NoopAnimationsModule,
+      ],
       providers: [{ provide: 'welcomeMsg', useValue: 'Welcome on unit test' }],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

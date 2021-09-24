@@ -14,8 +14,8 @@
 </div>
 
 <div class="row text-center">
-    <ng-container *ngFor="let product of products$ | async">
-        <app-product class="col-md-3 col-sm-6" *ngIf="isAvailable(product)" [data]="product"
+    <ng-container *ngFor="let product of products$ | async; trackBy: trackByProduct">
+        <app-product [@productAnim] class="col-md-3 col-sm-6" *ngIf="isAvailable(product)" [data]="product"
             (addToBasket)="addToBasket($event)"></app-product>
     </ng-container>
 </div>

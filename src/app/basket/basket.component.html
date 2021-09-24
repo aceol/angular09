@@ -12,23 +12,29 @@
     <div class="card-header">Order</div>
 
     <div class="card-body">
-        <form (submit)="checkout()">
+        <form (submit)="checkout()" [formGroup]="myForm">
             <div class="form-group">
                 <label class="control-label" for="name">Name</label>
-                <input type="text" id="name" class="form-control" name="name">
+                <input type="text" id="name" class="form-control" name="name" formControlName='name'>
+                <label *ngIf="isRequired('name')">Ce champs est requis</label>
             </div>
 
             <div class="form-group">
                 <label class="control-label" for="address">Address</label>
-                <textarea id="address" class="form-control" name="address"></textarea>
+                <textarea id="address" class="form-control" name="address" formControlName='address'></textarea>
+                <label *ngIf="isRequired('address')">Ce champs est requis</label>
             </div>
 
             <div class="form-group">
                 <label class="control-label" for="creditCard">Credit card number</label>
-                <input id="creditCard" class="form-control" name="creditCard">
-            </div>
+                <input [ngClass]="{error: myForm.get('creditCard')?.errors}" id="creditCard" class="form-control"
+                    name="creditCard" formControlName='creditCard'>
 
-            <button type="button" (click)="checkout()" class="btn btn-success pull-right">Validate</button>
+                <label *ngIf="isRequired('creditCard')">Ce champs est requis</label>
+                <label *ngIf="myForm.get('creditCard')?.errors?.pattern">Ce champs est mal formatté</label>
+            </div>
+            <button type="button" (click)="checkout()" [disabled]="!myForm.valid"
+                class="btn btn-success pull-right">Validate</button>
         </form>
     </div>
 </div>
